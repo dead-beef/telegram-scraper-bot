@@ -44,6 +44,7 @@ Config
 ------
 
 ::
+
     {
       "token": "<token>",
       "proxy": "<scheme>://<host>:<port>",
@@ -78,6 +79,7 @@ Commands
 --------
 
 ::
+
     commands:
       /start, /help - bot help
       /chatinfo - show chat info
