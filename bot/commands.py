@@ -96,6 +96,10 @@ admin commands in private chat:
     async def match_command_username(self, msg: aiogram.types.Message) -> None:
         command: List[str] = msg.get_command().split('@', 1)
         if len(command) == 2 and command[1] != self.username:
+            self.logger.debug(
+                '!match_command_username %r %r',
+                command, self.username
+            )
             return
 
         name: str

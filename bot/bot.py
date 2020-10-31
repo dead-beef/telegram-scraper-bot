@@ -45,8 +45,16 @@ class Bot:
         )
         self.commands: BotCommands = BotCommands(self.config, self.dispatcher)
 
+    async def init(self) -> None:
+        self.logger.info('initializing bot')
+        bot_user: aiogram.types.User = await self.bot.get_me()
+        username: str = bot_user.mention[1:]
+        self.logger.info('username = %r', username)
+        self.commands.username = username
+
     async def run(self) -> None:
         try:
+            await self.init()
             self.logger.info('running bot')
             bot_user: aiogram.types.User = await self.bot.get_me()
             self.commands.username = bot_user.mention[1:]
@@ -57,6 +65,7 @@ class Bot:
 
     async def start(self) -> None:
         try:
+            await self.init()
             self.logger.info('starting bot')
             self.started_polling = True
             self._poll_task = asyncio.create_task(
